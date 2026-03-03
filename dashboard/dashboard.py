@@ -1007,8 +1007,11 @@ class DashboardManager:
             LIMIT 3
         """)
         top_skills = cursor.fetchall()
-        if top_skills:
-            skills_text = f"Most in-demand skills: Python ({top_skills[0][1]} resumes), Java ({top_skills[1][1]} resumes), Express ({top_skills[2][1]} resumes)"
+
+        if len(top_skills) >= 3:
+              skills_text = f"Most in-demand skills: {top_skills[0][0]} ({top_skills[0][1]} resumes), {top_skills[1][0]} ({top_skills[1][1]} resumes), {top_skills[2][0]} ({top_skills[2][1]} resumes)"
+        else:
+            skills_text = "Not enough resume data to generate skill insights."  
             insights.append({
                 'title': 'Top Skills',
                 'icon': '💡',
